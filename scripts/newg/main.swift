@@ -18,6 +18,7 @@ try sample.write(to: file)
 try NEWGRelease.verify(file, size: Int64(sample.count), sha256: hash)
 rejects { try NEWGRelease.verify(file, size: Int64(sample.count + 1), sha256: hash) }
 rejects { try NEWGRelease.verify(file, size: Int64(sample.count), sha256: String(repeating: "0", count: 64)) }
+rejects { try NEWGRelease.verify(file, size: Int64(sample.count), sha256: hash, shouldCancel: { true }) }
 
 let validURL = URL(string: "https://\(NEWGRelease.downloadHost)/ros-new-gen-builds/builds/ios-owner-pilot/ROS.ipa?X-Amz-Signature=test")!
 let release = NEWGRelease(version: "v59", bundleIdentifier: "com.netease.chiji.rcs", downloadURL: validURL, size: Int64(sample.count), sha256: hash)

@@ -12,7 +12,7 @@ with zipfile.ZipFile(path) as archive:
     assert 'newg-launcher' in schemes and 'sidestore' in schemes
     assert 'NEWGGameRelease' not in info,'Owner URL must not be in public artifacts'
     native=archive.read('Payload/SideStore.app/'+info['CFBundleExecutable'])
-    assert b'NEWG Launcher' in native and b'NEWG-Verified' in native
+    assert b'ROS NEW GENERATION' in native and b'Verifying the complete IPA' in native
     assert any(n.endswith('SideBackup.ipa') for n in archive.namelist())
 with path.open('rb') as f:digest=hashlib.file_digest(f,'sha256').hexdigest()
 receipt={'bytes':path.stat().st_size,'sha256':digest,'bundle_id':info['CFBundleIdentifier'],

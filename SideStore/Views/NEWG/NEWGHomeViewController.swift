@@ -103,7 +103,9 @@ final class NEWGHomeViewController: UIViewController, UIDocumentPickerDelegate {
     }
 
     private func loadRelease() {
-        if let data = try? Data(contentsOf: cachedReleaseURL), let item = try? NEWGRelease.decode(data) {
+        if let values = try? cachedReleaseURL.resourceValues(forKeys: [.fileSizeKey]),
+           (values.fileSize ?? Int.max) <= 65_536,
+           let data = try? Data(contentsOf: cachedReleaseURL), let item = try? NEWGRelease.decode(data) {
             release = item
         } else if let dictionary = Bundle.main.object(forInfoDictionaryKey: "NEWGGameRelease") as? [String: Any],
                   let data = try? JSONSerialization.data(withJSONObject: dictionary),

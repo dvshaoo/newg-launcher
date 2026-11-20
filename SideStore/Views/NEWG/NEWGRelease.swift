@@ -37,15 +37,17 @@ struct NEWGRelease: Codable, Sendable {
         return try JSONDecoder().decode(Self.self, from: data).validated()
     }
 
-    static func verify(_ file: URL, size: Int64, sha256: String) throws {
+    static func verify(_ file: URL, size: Int64, sha256: String, shouldCancel: () -> Bool = { false }) throws {
         let values = try file.resourceValues(forKeys: [.fileSizeKey])
         guard Int64(values.fileSize ?? -1) == size else { throw NEWGReleaseError.wrongSize }
         let input = try FileHandle(forReadingFrom: file)
         defer { try? input.close() }
         var digest = SHA256()
         while let data = try input.read(upToCount: 4 * 1024 * 1024), !data.isEmpty {
+            if shouldCancel() { throw URLError(.cancelled) }
             digest.update(data: data)
         }
+        if shouldCancel() { throw URLError(.cancelled) }
         let actual = digest.finalize().map { String(format: "%02x", $0) }.joined()
         guard actual == sha256.lowercased() else { throw NEWGReleaseError.wrongHash }
     }

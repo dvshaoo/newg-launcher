@@ -9,6 +9,8 @@ final class NEWGDownload: NSObject, URLSessionDownloadDelegate, @unchecked Senda
     private var task: URLSessionDownloadTask?
     // Delegate callbacks run on one serial queue, including terminal delivery.
     private var finished = false
+    private let stateLock = NSLock()
+    private var cancelled = false
 
     init(release: NEWGRelease,
          progress: @escaping @Sendable (Double) -> Void,
@@ -32,7 +34,18 @@ final class NEWGDownload: NSObject, URLSessionDownloadDelegate, @unchecked Senda
         task.resume()
     }
 
-    func cancel() { task?.cancel() }
+    func cancel() {
+        stateLock.lock()
+        cancelled = true
+        stateLock.unlock()
+        task?.cancel()
+    }
+
+    private func isCancelled() -> Bool {
+        stateLock.lock()
+        defer { stateLock.unlock() }
+        return cancelled
+    }
 
     func urlSession(_ session: URLSession, task: URLSessionTask,
                     willPerformHTTPRedirection response: HTTPURLResponse,
@@ -58,7 +71,7 @@ final class NEWGDownload: NSObject, URLSessionDownloadDelegate, @unchecked Senda
             guard let response = downloadTask.response as? HTTPURLResponse, response.statusCode == 200 else {
                 throw NEWGReleaseError.http((downloadTask.response as? HTTPURLResponse)?.statusCode ?? 0)
             }
-            try NEWGRelease.verify(location, size: release.size, sha256: release.sha256)
+            try NEWGRelease.verify(location, size: release.size, sha256: release.sha256, shouldCancel: { self.isCancelled() })
             let directory = FileManager.default.temporaryDirectory.appendingPathComponent("NEWG-Verified", isDirectory: true)
             try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
             let destination = directory.appendingPathComponent(UUID().uuidString + ".ipa")
