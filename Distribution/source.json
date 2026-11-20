@@ -8,16 +8,16 @@
       "name": "NEWG Launcher",
       "bundleIdentifier": "com.rosnewgen.launcher",
       "developerName": "NEWG / SideStore contributors",
-      "localizedDescription": "Personal Apple Account signing and on-device renewal. Initial PC pairing and LocalDevVPN are required. AGPL-3.0 SideStore derivative. Pilot has not passed physical phone verification.",
+      "localizedDescription": "Owner pilot with official Apple sign-in repair from SideStore 0.7.0-alpha. Personal Apple Account signing and on-device renewal need initial PC pairing and LocalDevVPN. Physical sign-in and renewal acceptance pending. AGPL-3.0 derivative.",
       "iconURL": "https://raw.githubusercontent.com/dvshaoo/newg-launcher/newg-pilot/Distribution/icon.png",
       "versions": [
         {
-          "version": "0.1.0",
-          "date": "2026-11-20T04:00:00Z",
-          "downloadURL": "https://github.com/dvshaoo/newg-launcher/releases/download/pilot-0.1.0/NEWG_Launcher_0.1.0_UNSIGNED.ipa",
-          "size": 27636205,
+          "version": "0.1.1",
+          "date": "2026-11-20T05:18:35.678332+00:00",
+          "downloadURL": "https://github.com/dvshaoo/newg-launcher/releases/download/pilot-0.1.1/NEWG_Launcher_0.1.1_UNSIGNED.ipa",
+          "size": 27783839,
           "minOSVersion": "15.0",
-          "sha256": "09b72ef2edb90add06355fc9c7d22c86d9db59f88f4f43e0ac960ebb945022b6"
+          "sha256": "8e8e0183d96224a29523abbb8fe916343ee27e39162c0d00114bf22f029642d1"
         }
       ]
     }
