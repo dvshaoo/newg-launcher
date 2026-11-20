@@ -15,8 +15,9 @@
           "version": "0.1.0",
           "date": "2026-11-20T04:00:00Z",
           "downloadURL": "https://github.com/dvshaoo/newg-launcher/releases/download/pilot-0.1.0/NEWG_Launcher_0.1.0_UNSIGNED.ipa",
-          "size": 0,
-          "minOSVersion": "15.0"
+          "size": 27636205,
+          "minOSVersion": "15.0",
+          "sha256": "09b72ef2edb90add06355fc9c7d22c86d9db59f88f4f43e0ac960ebb945022b6"
         }
       ]
     }
