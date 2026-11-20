@@ -11,8 +11,8 @@ import Foundation
 // @livecontainer
 private extension Bundle {
     @objc dynamic static let activeBundle: Bundle = Bundle.main
-    @objc dynamic static let storeAppBundleIdentifier = "com.SideStore.SideStore"
-    @objc dynamic static let appbundleIdentifier = "com.SideStore.SideStore"
+    @objc dynamic static let storeAppBundleIdentifier = "com.rosnewgen.launcher"
+    @objc dynamic static let appbundleIdentifier = "com.rosnewgen.launcher"
 }
 
 public extension Bundle

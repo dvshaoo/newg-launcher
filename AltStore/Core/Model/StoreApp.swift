@@ -686,17 +686,17 @@ public extension StoreApp
     class func makeAltStoreApp(version: String, buildVersion: String?, in context: NSManagedObjectContext) -> StoreApp
     {
         let placeholderBundleId = StoreApp.altstoreAppID
-        let placeholderDownloadURL = URL(string: "https://sidestore.io")!
+        let placeholderDownloadURL = URL(string: "https://github.com/dvshaoo/newg-launcher/releases/download/pilot-0.1.0/NEWG_Launcher_0.1.0_UNSIGNED.ipa")!
         let placeholderSourceID = Source.altStoreIdentifier
         let placeholderVersion = "0.0.0"
         let placeholderDate = Date.distantPast
         let placeholderChannel = ReleaseTrackType.stable.description
         
         let app = StoreApp(context: context)
-        app.name = "SideStore"
+        app.name = "NEWG Launcher"
         app.bundleIdentifier = placeholderBundleId
-        app.developerName = "Side Team"
-        app.localizedDescription = "SideStore is an alternative App Store."
+        app.developerName = "NEWG / SideStore contributors"
+        app.localizedDescription = "NEWG launcher with personal Apple Account signing and renewal, based on SideStore."
         app.iconURL = sideStoreAppIconURL        
         app.screenshotURLs = []
         app.sourceIdentifier = placeholderSourceID

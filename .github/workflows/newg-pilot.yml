@@ -1,0 +1,61 @@
+name: NEWG Launcher owner pilot
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: newg-owner-pilot
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: macos-26
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 1
+      - name: Select installed Xcode
+        run: |
+          xcodebuild -version
+          xcrun swift --version
+      - name: Test NEWG release validation
+        run: |
+          xcrun swiftc SideStore/Views/NEWG/NEWGRelease.swift scripts/newg/main.swift -o /tmp/newg-release-tests
+          /tmp/newg-release-tests
+      - name: Install build tools
+        run: brew install ldid xcbeautify
+      - name: Cache Swift dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/Library/Caches/org.swift.swiftpm
+            ~/Library/Developer/Xcode/DerivedData
+          key: newg-064-macos26-${{ hashFiles('AltStore.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved') }}
+      - name: Build unsigned launcher
+        shell: bash
+        run: |
+          set -o pipefail
+          mkdir -p build/logs
+          xcodebuild archive -project AltStore.xcodeproj -scheme SideStore -sdk iphoneos \
+            -configuration Release -archivePath ./SideStore \
+            CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO \
+            AD_HOC_CODE_SIGNING_ALLOWED=YES DEVELOPMENT_TEAM=XYZ0123456 \
+            ORG_IDENTIFIER=com.rosnewgen \
+            2>&1 | tee build/logs/newg-build.log | xcbeautify --renderer github-actions
+          make fakesign ipa
+          mv SideStore.ipa NEWG_Launcher_0.1.0_UNSIGNED.ipa
+          python3 scripts/newg/verify_package.py NEWG_Launcher_0.1.0_UNSIGNED.ipa
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: NEWG-Launcher-build-logs
+          path: build/logs/newg-build.log
+          retention-days: 3
+      - uses: actions/upload-artifact@v4
+        with:
+          name: NEWG-Launcher-0.1.0-UNSIGNED
+          path: |
+            NEWG_Launcher_0.1.0_UNSIGNED.ipa
+            newg-package-receipt.json
+          retention-days: 3

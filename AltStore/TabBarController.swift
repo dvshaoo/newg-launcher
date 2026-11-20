@@ -47,6 +47,29 @@ final class TabBarController: UITabBarController
         
         let sourcesNavigationController = self.viewControllers![Tab.sources.rawValue] as! UINavigationController
         self.sourcesViewController = sourcesNavigationController.viewControllers.first as? SourcesViewController
+
+        // Retain the original tab indices and signing/install/refresh controllers.
+        // Replace only the news tab with the NEWG pilot landing screen.
+        if #available(iOS 15.0, *) {
+            let home = NEWGHomeViewController()
+            home.showMyApps = { [weak self] in
+                self?.selectedIndex = Tab.myApps.rawValue
+            }
+            home.renewApps = { [weak self] in
+                guard let self else { return }
+                self.selectedIndex = Tab.myApps.rawValue
+                guard let navigation = self.viewControllers?[Tab.myApps.rawValue] as? UINavigationController,
+                      let apps = navigation.viewControllers.first as? MyAppsViewController else { return }
+                apps.loadViewIfNeeded()
+                apps.refreshAllApps(UIBarButtonItem())
+            }
+            let navigation = UINavigationController(rootViewController: home)
+            navigation.tabBarItem = UITabBarItem(title: "NEWG", image: UIImage(systemName: "gamecontroller"), tag: 0)
+            var tabs = self.viewControllers!
+            tabs[Tab.news.rawValue] = navigation
+            self.viewControllers = tabs
+            self.selectedIndex = Tab.news.rawValue
+        }
     }
     
     override func viewDidAppear(_ animated: Bool)

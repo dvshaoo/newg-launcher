@@ -66,6 +66,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>sidestore</string>
+				<string>newg-launcher</string>
 			</array>
 		</dict>
 		<dict>
@@ -88,8 +89,8 @@
 	</array>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
-		<string>sidestore-com.SideStore.SideStore</string>
-		<string>sidestore-com.SideStore.SideStore.Beta</string>
+		<string>sidestore-com.rosnewgen.launcher</string>
+		<string>sidestore-com.rosnewgen.launcher.Beta</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
@@ -315,5 +316,7 @@
 			</dict>
 		</dict>
 	</array>
+	<key>CFBundleDisplayName</key>
+	<string>NEWG Launcher</string>
 </dict>
 </plist>

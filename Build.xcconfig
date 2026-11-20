@@ -1,12 +1,12 @@
 // Configuration settings file format documentation can be found at:
 // https://help.apple.com/xcode/#/dev745c5c974
 
-MARKETING_VERSION = 0.6.4
-CURRENT_PROJECT_VERSION = 0604
+MARKETING_VERSION = 0.1.0
+CURRENT_PROJECT_VERSION = 1
 
 // Vars to be overwritten by `CodeSigning.xcconfig` if exists
-DEVELOPMENT_TEAM = S32Z3HMYVQ
-ORG_IDENTIFIER = com.SideStore
+DEVELOPMENT_TEAM = XYZ0123456
+ORG_IDENTIFIER = com.rosnewgen
 
 // Default is free for CI builds, override it using CodeSigning.xcconfig if required
 CODE_SIGN_ENTITLEMENTS = ./AltStore/AltStoreFree.entitlements
@@ -16,7 +16,7 @@ CODE_SIGN_ENTITLEMENTS = ./AltStore/AltStoreFree.entitlements
 
 PRODUCT_NAME = SideStore
 
-BASE_BUNDLE_ID                                  = $(ORG_IDENTIFIER).SideStore
+BASE_BUNDLE_ID                                  = $(ORG_IDENTIFIER).launcher
 MAIN_BUNDLE_IDENTIFIER[config=Debug]            = $(BASE_BUNDLE_ID).$(DEVELOPMENT_TEAM)
 MAIN_BUNDLE_IDENTIFIER[config=Release]          = $(BASE_BUNDLE_ID)
 APP_GROUP_IDENTIFIER                            = $(MAIN_BUNDLE_IDENTIFIER)

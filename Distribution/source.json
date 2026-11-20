@@ -1,0 +1,25 @@
+{
+  "name": "NEWG Launcher",
+  "subtitle": "Owner phone pilot",
+  "identifier": "com.rosnewgen.launcher.source",
+  "website": "https://rosnewgen.com",
+  "apps": [
+    {
+      "name": "NEWG Launcher",
+      "bundleIdentifier": "com.rosnewgen.launcher",
+      "developerName": "NEWG / SideStore contributors",
+      "localizedDescription": "Personal Apple Account signing and on-device renewal. Initial PC pairing and LocalDevVPN are required. AGPL-3.0 SideStore derivative. Pilot has not passed physical phone verification.",
+      "iconURL": "https://raw.githubusercontent.com/dvshaoo/newg-launcher/newg-pilot/Distribution/icon.png",
+      "versions": [
+        {
+          "version": "0.1.0",
+          "date": "2026-11-20T04:00:00Z",
+          "downloadURL": "https://github.com/dvshaoo/newg-launcher/releases/download/pilot-0.1.0/NEWG_Launcher_0.1.0_UNSIGNED.ipa",
+          "size": 0,
+          "minOSVersion": "15.0"
+        }
+      ]
+    }
+  ],
+  "news": []
+}
