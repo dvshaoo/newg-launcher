@@ -20,6 +20,14 @@ import Nuke
 
 private let maximumCollapsedUpdatesCount = 2
 
+// Keep the original fileprivate refresh implementation and confirmations intact.
+extension MyAppsViewController {
+    @MainActor func newgRenewFromLauncher() {
+        self.loadViewIfNeeded()
+        self.refreshAllApps(UIBarButtonItem())
+    }
+}
+
 extension MyAppsViewController
 {
     private enum Section: Int, CaseIterable

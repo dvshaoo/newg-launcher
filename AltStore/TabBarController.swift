@@ -61,7 +61,7 @@ final class TabBarController: UITabBarController
                 guard let navigation = self.viewControllers?[Tab.myApps.rawValue] as? UINavigationController,
                       let apps = navigation.viewControllers.first as? MyAppsViewController else { return }
                 apps.loadViewIfNeeded()
-                apps.refreshAllApps(UIBarButtonItem())
+                apps.newgRenewFromLauncher()
             }
             let navigation = UINavigationController(rootViewController: home)
             navigation.tabBarItem = UITabBarItem(title: "NEWG", image: UIImage(systemName: "gamecontroller"), tag: 0)
