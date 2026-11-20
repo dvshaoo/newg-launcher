@@ -44,8 +44,8 @@ jobs:
             ORG_IDENTIFIER=com.rosnewgen \
             2>&1 | tee build/logs/newg-build.log | xcbeautify --renderer github-actions
           make fakesign ipa
-          mv SideStore.ipa NEWG_Launcher_0.1.0_UNSIGNED.ipa
-          python3 scripts/newg/verify_package.py NEWG_Launcher_0.1.0_UNSIGNED.ipa
+          mv SideStore.ipa NEWG_Launcher_0.1.1_UNSIGNED.ipa
+          python3 scripts/newg/verify_package.py NEWG_Launcher_0.1.1_UNSIGNED.ipa
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -54,8 +54,8 @@ jobs:
           retention-days: 3
       - uses: actions/upload-artifact@v4
         with:
-          name: NEWG-Launcher-0.1.0-UNSIGNED
+          name: NEWG-Launcher-0.1.1-UNSIGNED
           path: |
-            NEWG_Launcher_0.1.0_UNSIGNED.ipa
+            NEWG_Launcher_0.1.1_UNSIGNED.ipa
             newg-package-receipt.json
           retention-days: 3

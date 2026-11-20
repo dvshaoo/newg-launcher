@@ -1,7 +1,7 @@
 # NEWG Launcher — owner phone pilot
 
-Modified from SideStore stable 0.6.4, commit
-f93a95c079057090bea355453ef24f6e8668dfa9. Licensed under the original GNU AGPLv3;
+Modified from SideStore 0.7.0-alpha, commit
+6032424a0e56c1c319762e786099bdd9186a238b. Licensed under the original GNU AGPLv3;
 all upstream copyright and license notices are retained. This is an independent
 NEWG fork, not an official SideStore release.
 
@@ -38,3 +38,8 @@ Do not uninstall existing ROS or send Apple passwords to a NEWG website.
 Upstream setup: https://docs.sidestore.io/docs/installation/prerequisites.html
 
 Source: https://github.com/dvshaoo/newg-launcher
+
+0.1.1 adopts the official fixed Apple authentication base after the owner pilot
+reported HTML 503 on 0.1.0. Original 0.6.4 is deprecated upstream. Home treats
+closing sign-in as cancellation; actual sign-in errors remain in the native
+authentication screen. Physical sign-in and renewal still require owner testing.

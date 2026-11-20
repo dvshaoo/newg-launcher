@@ -132,6 +132,8 @@ final class NEWGHomeViewController: UIViewController, UIDocumentPickerDelegate {
                 guard let self else { return }
                 switch result {
                 case .success: self.status.text = "Apple Account connected. Turn on LocalDevVPN, then renew the launcher."
+                case .failure(let error) where error is CancellationError || (error as NSError).domain == CancellationError()._domain:
+                    self.status.text = "Sign-in cancelled. Apple Account is not connected."
                 case .failure(let error): self.status.text = error.localizedDescription
                 }
                 self.updateState()

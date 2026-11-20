@@ -7,7 +7,7 @@ with zipfile.ZipFile(path) as archive:
     info=plistlib.loads(archive.read('Payload/SideStore.app/Info.plist'))
     assert info['CFBundleIdentifier']=='com.rosnewgen.launcher'
     assert info['CFBundleDisplayName']=='NEWG Launcher'
-    assert info['CFBundleShortVersionString']=='0.1.0'
+    assert info['CFBundleShortVersionString']=='0.1.1'
     schemes=[s for t in info['CFBundleURLTypes'] for s in t['CFBundleURLSchemes']]
     assert 'newg-launcher' in schemes and 'sidestore' in schemes
     assert 'NEWGGameRelease' not in info,'Owner URL must not be in public artifacts'
@@ -19,6 +19,6 @@ receipt={'bytes':path.stat().st_size,'sha256':digest,'bundle_id':info['CFBundleI
          'version':info['CFBundleShortVersionString'],'zip_crc_verified':True,'native_newg_ui_present':True,
          'unsigned_requires_personal_signing':True,'apple_credentials_included':False,
          'phone_install_or_renewal_verified':False,'source':'https://github.com/dvshaoo/newg-launcher',
-         'upstream':'SideStore/SideStore 0.6.4 f93a95c079057090bea355453ef24f6e8668dfa9','license':'AGPL-3.0-only'}
+         'upstream':'SideStore/SideStore 0.7.0-alpha 6032424a0e56c1c319762e786099bdd9186a238b','license':'AGPL-3.0-only'}
 Path('newg-package-receipt.json').write_text(json.dumps(receipt,indent=2)+'\n')
 print(json.dumps(receipt))

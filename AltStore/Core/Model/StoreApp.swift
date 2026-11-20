@@ -680,13 +680,13 @@ public extension StoreApp
             }
         }
         
-        return URL(string: "https://sidestore.io/apps-v2.json/apps/sidestore/icon.png")!
+        return AppConstants.Sources.sideStoreFallbackIconURL
     }
     
     class func makeAltStoreApp(version: String, buildVersion: String?, in context: NSManagedObjectContext) -> StoreApp
     {
         let placeholderBundleId = StoreApp.altstoreAppID
-        let placeholderDownloadURL = URL(string: "https://github.com/dvshaoo/newg-launcher/releases/download/pilot-0.1.0/NEWG_Launcher_0.1.0_UNSIGNED.ipa")!
+        let placeholderDownloadURL = URL(string: "https://github.com/dvshaoo/newg-launcher/releases/download/pilot-0.1.1/NEWG_Launcher_0.1.1_UNSIGNED.ipa")!
         let placeholderSourceID = Source.altStoreIdentifier
         let placeholderVersion = "0.0.0"
         let placeholderDate = Date.distantPast
